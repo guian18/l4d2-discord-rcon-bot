@@ -19,6 +19,18 @@ El bot abre una conexión por operación, se autentica y ejecuta sólo una de es
 
 El texto de `/say` tiene longitud máxima configurable, y se escapan comillas, barras invertidas y saltos de línea. La salida se limita antes de enviarse a Discord para respetar el tamaño de los mensajes.
 
+## Chat escrito dentro del juego hacia Discord
+
+El camino inverso no se puede resolver con RCON. Para leer el chat que escriben los jugadores hay que ejecutar código dentro del servidor mediante SourceMod. Esto requiere que el operador controle los archivos del servidor y pueda instalar plugins y extensiones.
+
+La opción más completa encontrada es [Source Chat Relay](https://github.com/maxijabase/scr-server) con [scr-client](https://github.com/maxijabase/scr-client). El plugin captura los mensajes del chat del juego y los envía a un relay WebSocket. El relay los enruta al canal Discord vinculado. El sistema también puede funcionar en sentido bidireccional, pero para reducir riesgos conviene crear un enlace sólo de salida para el tipo `chat` y desactivar los comandos remotos. Sus requisitos incluyen SourceMod 1.11+, `sm-ext-websocket`, `sm-ripext`, SteamWorks, Bun, SQLite persistente y una aplicación Discord con permisos de publicación.[10] [11]
+
+La alternativa más pequeña es `sp-discordrelay`, que captura el chat con callbacks genéricos de SourceMod y lo publica mediante un webhook. El repositorio no menciona ni prueba L4D2 explícitamente, y su cadena de dependencias es antigua. Debe fijarse un commit, comprobar la compilación con la versión de SourceMod instalada y probar el chat real antes de utilizarlo.[12]
+
+Ninguna de estas opciones sirve para servidores oficiales de Valve. En una instancia oficial no se puede instalar SourceMod, un plugin de captura o un relay autorizado. Por lo tanto, el chat de un servidor oficial no puede llegar a este bot; sólo puede usarse el chat o la voz del juego, Steam o Discord.
+
+Para el repositorio actual no he integrado automáticamente este relay. El bot existente es un cliente RCON de salida y añadir un segundo cliente Discord o un servidor WebSocket completo sin disponer de un servidor comunitario de prueba podría duplicar sesiones, secretos y comandos. La integración segura requiere primero elegir entre desplegar `scr-server` como servicio separado o adaptar su protocolo al bot actual. En ambos casos se debe comprobar la licencia de los repositorios, proteger el WebSocket y probar el flujo juego → Discord con mensajes normales, UTF-8 y reconexión.
+
 ## Proyectos encontrados
 
 | Proyecto | Tipo | Resultado de la revisión |
@@ -60,3 +72,6 @@ La investigación se contrastó con la especificación de Valve y con los README
 [7]: https://github.com/log-ical/sp-discordrelay "log-ical/sp-discordrelay: Source Engine Discord relay"
 [8]: https://github.com/gorcon/rcon "gorcon/rcon: Go Source RCON implementation"
 [9]: https://github.com/conqp/rcon "conqp/rcon: Python RCON library"
+[10]: https://github.com/maxijabase/scr-client "maxijabase/scr-client: Source Chat Relay SourceMod client"
+[11]: https://github.com/maxijabase/scr-server "maxijabase/scr-server: Source Chat Relay server"
+[12]: https://github.com/log-ical/sp-discordrelay "log-ical/sp-discordrelay: Source Engine Discord relay"

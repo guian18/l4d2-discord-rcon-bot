@@ -21,6 +21,16 @@ Los servidores oficiales de Valve no están bajo el control del jugador y normal
 
 El proyecto está destinado a servidores dedicados privados o comunitarios administrados por el usuario. Para esos servidores, el administrador debe configurar `rcon_password`, confirmar el puerto RCON, permitir la conexión desde el host del bot y entregar las credenciales de forma segura. Para hablar con un amigo en un servidor oficial deben utilizarse el chat o la voz de Left 4 Dead 2, Steam o Discord.
 
+## Chat del juego hacia Discord
+
+La función actual del bot sólo envía mensajes desde Discord hacia el servidor mediante RCON. Para que los mensajes escritos **dentro del juego** lleguen a un canal de Discord hace falta instalar un plugin en el servidor de juego; RCON por sí solo no recibe eventos de chat.
+
+La alternativa más completa encontrada es [Source Chat Relay](https://github.com/maxijabase/scr-server) junto con su plugin [scr-client](https://github.com/maxijabase/scr-client). `scr-client` captura el chat de SourceMod y lo envía por WebSocket al relay, mientras `scr-server` lo entrega al canal de Discord enlazado. Requiere acceso administrativo al servidor, SourceMod 1.11+, extensiones WebSocket y REST in Pawn, un proceso Bun del relay y una aplicación de Discord separada o una integración específica. Su documentación menciona L4D2 para una limitación de salida de comandos, pero no garantiza que el relay de chat haya sido probado en L4D2; debe validarse en un servidor comunitario de prueba.
+
+Otra alternativa es [sp-discordrelay](https://github.com/log-ical/sp-discordrelay), un plugin SourceMod que publica el chat mediante un webhook de Discord. No documenta compatibilidad específica con L4D2 y depende de extensiones antiguas, por lo que debe considerarse experimental. Para un relay únicamente de salida hay que habilitar el envío servidor → Discord y mantener deshabilitado el sentido Discord → servidor y cualquier canal RCON.
+
+**Esto no funciona en un servidor oficial de Valve.** No puedes instalar `scr-client`, SourceMod ni otro plugin en una instancia oficial, y el bot no puede leer su chat. Esta función sólo es viable en un servidor privado o comunitario cuyo administrador controle los archivos y la configuración.
+
 ## Configuración de Left 4 Dead 2
 
 En la configuración del servidor establece una contraseña fuerte, por ejemplo:
