@@ -13,6 +13,14 @@ Se necesita Node.js 20 o posterior, un bot creado en el [Discord Developer Porta
 
 El proceso del bot debe poder alcanzar `RCON_HOST`. Lo recomendable es ejecutar el bot en la misma máquina o red privada que el servidor. No publiques RCON directamente en Internet: el protocolo no proporciona cifrado para la contraseña ni para los comandos.
 
+## Importante: servidores oficiales de Valve
+
+Este bot **no puede enviar mensajes a servidores oficiales de Valve**. Una dirección como `155.133.244.69:27069` sólo identifica una instancia de juego; no proporciona permisos administrativos ni una contraseña RCON.
+
+Los servidores oficiales de Valve no están bajo el control del jugador y normalmente no exponen un `rcon_password` para usuarios externos. Por eso no es posible usar `/say`, `/status` ni comandos RCON contra ellos, aunque se conozcan la dirección y el puerto. Intentar acceder sin autorización no sería un uso permitido del bot.
+
+El proyecto está destinado a servidores dedicados privados o comunitarios administrados por el usuario. Para esos servidores, el administrador debe configurar `rcon_password`, confirmar el puerto RCON, permitir la conexión desde el host del bot y entregar las credenciales de forma segura. Para hablar con un amigo en un servidor oficial deben utilizarse el chat o la voz de Left 4 Dead 2, Steam o Discord.
+
 ## Configuración de Left 4 Dead 2
 
 En la configuración del servidor establece una contraseña fuerte, por ejemplo:
