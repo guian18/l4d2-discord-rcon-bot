@@ -99,10 +99,6 @@ El repositorio no incluye credenciales ni puede validar una conexión real sin a
 
 `src/config.ts` valida las variables de entorno. `src/rcon.ts` abre una conexión autenticada por operación, aplica timeout y construye únicamente `say` o `status`. `src/index.ts` registra los comandos slash y aplica la restricción de guild, canal y rol.
 
-## Investigación y límites de compatibilidad
-
-Consulta [`docs/investigacion.md`](docs/investigacion.md) para la comparación de proyectos existentes. El bot L4D2 específico más directo encontrado, `americasectorcoop/L4D2-DISCORD-BOT`, usa dependencias antiguas. Por eso este repositorio implementa la misma ruta Discord → Source RCON con dependencias actuales y controles más estrechos, en vez de desplegar ese código sin revisar.
-
 La compatibilidad de transporte está basada en el protocolo Source RCON que usa SRCDS. Debe hacerse una prueba en un servidor de staging L4D2 antes de producción, especialmente para comprobar firewall, puerto, contraseña y respuesta de `status`.
 
 ## Licencia
