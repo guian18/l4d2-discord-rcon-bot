@@ -1,0 +1,25 @@
+services:
+  - type: worker
+    name: l4d2-discord-rcon-bot
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    autoDeployTrigger: off
+    envVars:
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: DISCORD_GUILD_ID
+        sync: false
+      - key: DISCORD_CHANNEL_ID
+        sync: false
+      - key: DISCORD_ADMIN_ROLE_ID
+        sync: false
+      - key: RCON_HOST
+        sync: false
+      - key: RCON_PORT
+        value: "27015"
+      - key: RCON_PASSWORD
+        sync: false
+      - key: MAX_MESSAGE_LENGTH
+        value: "180"
+      - key: RCON_TIMEOUT_MS
+        value: "3000"

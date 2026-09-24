@@ -1,5 +1,8 @@
 # Bot de Discord para mensajes en Left 4 Dead 2
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/guian18/Para-mandar-mensajes-en-servidores-de-Left-4-dead-2-)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/github)
+
 Bot pequeño de Discord que envía mensajes al chat de un servidor dedicado de **Left 4 Dead 2** mediante **Source RCON**. La implementación usa `discord.js` 14 y `rcon-srcds` 2.1.1. El bot expone dos comandos slash:
 
 - `/say mensaje`: envía `say "mensaje"` al servidor.
@@ -68,6 +71,19 @@ npm run dev
 ```
 
 Con `DISCORD_GUILD_ID`, los comandos se registran inmediatamente en ese servidor de Discord. Sin esa variable se registran globalmente, y Discord puede tardar en propagarlos.
+
+## Despliegue con hosting
+
+El repositorio incluye un [`Dockerfile`](Dockerfile) y un [`render.yaml`](render.yaml) para ejecutar el bot como un proceso trabajador persistente. Puedes iniciar el despliegue con uno de estos botones:
+
+- **Render:** el botón carga el Blueprint y crea un trabajador Docker. En un repositorio privado tendrás que instalar o autorizar la [aplicación de GitHub de Render](https://github.com/apps/render) para ese repositorio.
+- **Railway:** el botón abre el flujo oficial para conectar GitHub y seleccionar este repositorio. Railway detecta el `Dockerfile` y permite iniciar el despliegue desde el proyecto conectado.
+
+Después de crear el servicio, completa las variables privadas `DISCORD_TOKEN`, `RCON_HOST` y `RCON_PASSWORD`. Configura también `RCON_PORT`, `DISCORD_GUILD_ID`, `DISCORD_CHANNEL_ID` y `DISCORD_ADMIN_ROLE_ID` cuando corresponda. No introduzcas secretos en `render.yaml`, en `README.md` ni en los logs.
+
+El bot necesita una conexión de red saliente hacia Discord y una conexión TCP desde el hosting hacia `RCON_HOST:RCON_PORT`. Si el servidor L4D2 está en una red doméstica o detrás de un firewall, el hosting externo normalmente no podrá alcanzar RCON sin una VPN, túnel privado o regla de red específica. No abras RCON a todo Internet.
+
+Este proyecto es un worker sin página web ni puerto HTTP. Si el proveedor ofrece planes que duermen o suspenden procesos, no son adecuados para un bot de Discord que debe permanecer conectado; selecciona un servicio trabajador siempre activo según las condiciones y el precio vigentes del proveedor.
 
 ## Comprobación inicial
 
