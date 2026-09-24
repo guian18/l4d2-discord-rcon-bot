@@ -1,6 +1,6 @@
 # Bot de Discord para mensajes en Left 4 Dead 2
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/guian18/Para-mandar-mensajes-en-servidores-de-Left-4-dead-2-)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/guian18/l4d2-discord-rcon-bot)
 
 [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/github)
 
